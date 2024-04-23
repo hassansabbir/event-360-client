@@ -9,7 +9,8 @@ import "swiper/css/pagination";
 import "./styles.css";
 
 import { Pagination } from "swiper/modules";
-import { RiCheckFill } from "react-icons/ri";
+import { Button } from "@/components/ui/button";
+import ServiceCard from "@/components/ServiceCard";
 
 const Banner = () => {
   const { data, isLoading, isError } = useQuery({
@@ -51,26 +52,16 @@ const Banner = () => {
         <h1 className="font-bold border-b-2 border-[#344E71] text-2xl pb-6 text-center">
           OUR MOST POPULAR SERVICES
         </h1>
-        <div>
+        <div className="h-[600px]">
           <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
             {data?.data?.data?.map((item: TService) => (
-              <SwiperSlide className="flex flex-col p-10">
-                <>
-                  <div className="w-[362px] h-[192px]">
-                    <img src={item.bannerImg} alt="" />
-                  </div>
-                  <div className="text-start items-start my-7">
-                    <h1 className="text-3xl mb-5">{item.title}</h1>
-                    {item?.features?.map((f) => (
-                      <p className="flex items-center gap-4">
-                        <span className="">
-                          <RiCheckFill className="text-green-500 border border-primary rounded-full" />
-                        </span>{" "}
-                        {f}
-                      </p>
-                    ))}
-                  </div>
-                </>
+              <SwiperSlide className="flex flex-col p-10 ">
+                <ServiceCard props={item} />
+                <div className="w-full mt-auto">
+                  <Button className="w-full text-black h-12 rounded-none text-lg font-bold bg-gradient-to-r from-gradientFrom to-gradientTo">
+                    View Details
+                  </Button>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>

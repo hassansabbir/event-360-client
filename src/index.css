@@ -16,9 +16,9 @@
     --primary: 222.2 47.4% 11.2%;
     --primary-foreground: 210 40% 98%;
 
-    --gradient-from: 190 100% 49%;
-    --gradient-to: 174 100% 50%;
-    
+    --gradient-from: 174 100% 50%;
+    --gradient-to: 190 100% 49%;
+
     --bannerGradient-from: 190 100% 49%;
     --bannerGradient-to: 174 100% 50%;
 
