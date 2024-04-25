@@ -15,7 +15,7 @@ const ServicesSection = () => {
   }
 
   return (
-    <div className="py-10">
+    <div className="py-24">
       <div className="text-center">
         <h1 className="text-6xl">Our Services</h1>
         <p className="text-lg mx-auto my-6 w-[70ch]">
