@@ -2,6 +2,7 @@ import Container from "@/components/Container";
 import Banner from "./Banner";
 import ServicesSection from "./ServicesSection";
 import EventItems from "./EventItems";
+import Gallery from "./Gallery";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
         <Banner />
         <ServicesSection />
         <EventItems />
+        <Gallery />
       </Container>
     </div>
   );
