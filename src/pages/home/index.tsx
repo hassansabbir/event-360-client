@@ -10,14 +10,14 @@ import Footer from "@/components/layouts/Footer";
 
 const Home = () => {
   return (
-    <div className="bg-[#02011B] h-[848px]">
+    <div className="bg-[#02011B] md:h-[848px]">
       <Container className="text-white">
         <Banner />
         <ServicesSection />
         <EventItems />
         <Gallery />
       </Container>
-      <div className="bg-[#02011B] h-[800px]">
+      <div className="bg-[#02011B] md:h-[800px]">
         <Container className="text-white">
           <Pricing />
         </Container>
@@ -25,7 +25,6 @@ const Home = () => {
       <Container className="text-white">
         <Reviews />
         <RecentEvent />
-        <div className="divider text-white"></div>
         <Footer />
       </Container>
     </div>

@@ -33,22 +33,22 @@ const Banner = () => {
   };
 
   return (
-    <div className="flex gap-6">
+    <div className="md:flex gap-6">
       <div
         style={bgImg}
-        className="text-white w-[736px] h-[708px] flex items-end"
+        className="text-white md:w-[736px] md:h-[708px] flex items-end"
       >
-        <div className="bg-gradient-to-t from-black pt-40 px-10 pb-10">
-          <h1 className="text-5xl font-semibold mb-3">
+        <div className="bg-gradient-to-t from-black pt-40 md:px-10 px-4 pb-10">
+          <h1 className="md:text-5xl text-2xl font-semibold mb-3">
             New Packages For Winter
           </h1>
-          <p className="text-lg">
+          <p className="md:text-lg text-sm">
             Ut posuere felis arcu tellus tempus in in ultricies. Gravida id nibh
             ornare viverra. Ultrices faucibus neque velit risus ac id lorem.
           </p>
         </div>
       </div>
-      <div className="text-white p-10 w-[520px]">
+      <div className="text-white md:p-10 md:w-[520px]">
         <h1 className="font-bold border-b-2 border-[#344E71] text-2xl pb-6 text-center">
           OUR MOST POPULAR SERVICES
         </h1>
@@ -57,7 +57,7 @@ const Banner = () => {
             {data?.data?.data?.map((item: TService) => (
               <SwiperSlide className="flex flex-col p-10 ">
                 <ServiceCard props={item} />
-                <div className="w-full mt-auto">
+                <div className="w-full md:mt-auto">
                   <Button className="w-full text-black h-12 rounded-none text-lg font-bold bg-gradient-to-r from-gradientFrom to-gradientTo">
                     View Details
                   </Button>

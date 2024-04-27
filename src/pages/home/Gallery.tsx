@@ -12,8 +12,8 @@ import gallery10 from "../../assets/gallery10.png";
 
 const Gallery = () => {
   return (
-    <div className="py-56 flex justify-center items-center gap-24">
-      <div className="w-5/12">
+    <div className="py-56 flex flex-col md:flex-row justify-center items-center gap-44">
+      <div className="w-full md:w-5/12">
         <h1 className="text-6xl font-bold">Gallery</h1>
         <p className="my-8 w-full">
           Ut posuere felis arcu tellus tempus in in ultricies. Gravida id nibh
@@ -54,7 +54,7 @@ const Gallery = () => {
           </p>
         </div>
       </div>
-      <div className="w-7/12">
+      <div className="w-full md:w-7/12">
         <div className="  flex gap-4 items-center h-72">
           <div className="space-y-4">
             <img

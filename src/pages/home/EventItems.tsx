@@ -15,10 +15,10 @@ const EventItems = () => {
   }
   console.log(isLoading, data);
   return (
-    <div className="px-32">
+    <div className="md:px-32">
       <div className="text-center">
-        <h1 className="text-6xl font-bold">Event Items</h1>
-        <p className="text-xl w-[70ch] mx-auto my-7">
+        <h1 className="md:text-6xl font-bold">Event Items</h1>
+        <p className="text-xl md:w-[70ch] mx-auto my-7">
           Ut posuere felis arcu tellus tempus in in ultricies. Gravida id nibh
           ornare viverra. Ultrices faucibus neque velit risus ac id lorem.
         </p>

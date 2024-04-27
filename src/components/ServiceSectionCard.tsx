@@ -11,7 +11,7 @@ const ServiceCard: React.FC<{ props: ServiceCardProps }> = ({ props }) => {
   const { bannerImg, title, features } = props;
   return (
     <div className="flex flex-col h-[569px]">
-      <div className="w-[362px] h-[253px]">
+      <div className="md:w-[362px] md:h-[253px]">
         <img className="w-full h-[253px]" src={bannerImg} alt="" />
       </div>
       <div className="text-start items-start my-7">

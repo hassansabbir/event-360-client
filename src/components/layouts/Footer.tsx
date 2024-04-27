@@ -44,9 +44,9 @@ const Footer = () => {
           <h4>Request Demo</h4>
         </div>
       </footer>
-      <footer className="flex justify-between py-10">
+      <footer className="md:flex justify-between py-10">
         <p>@2023 All right reserved.</p>
-        <div className="flex gap-8">
+        <div className="md:flex gap-8">
           <p>Terms</p>
           <p>Privacy</p>
           <p>Contact</p>

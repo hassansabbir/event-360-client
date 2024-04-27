@@ -29,7 +29,7 @@ const RecentEvent = () => {
   return (
     <div>
       <h1 className="text-6xl font-bold text-center">Recent Events</h1>
-      <p className="text-xl my-10 mx-auto text-center w-[85ch]">
+      <p className="text-xl my-10 mx-auto text-center md:w-[85ch]">
         Ut posuere felis arcu tellus tempus in in ultricies. Gravida id nibh
         ornare viverra. Ultrices faucibus neque velit risus ac id lorem.
       </p>
