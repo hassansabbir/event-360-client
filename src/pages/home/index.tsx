@@ -5,6 +5,8 @@ import EventItems from "./EventItems";
 import Gallery from "./Gallery";
 import Pricing from "./Pricing";
 import Reviews from "./Reviews";
+import RecentEvent from "./RecentEvent";
+import Footer from "@/components/layouts/Footer";
 
 const Home = () => {
   return (
@@ -22,6 +24,9 @@ const Home = () => {
       </div>
       <Container className="text-white">
         <Reviews />
+        <RecentEvent />
+        <div className="divider text-white"></div>
+        <Footer />
       </Container>
     </div>
   );
