@@ -4,6 +4,7 @@ import ServicesSection from "./ServicesSection";
 import EventItems from "./EventItems";
 import Gallery from "./Gallery";
 import Pricing from "./Pricing";
+import Reviews from "./Reviews";
 
 const Home = () => {
   return (
@@ -14,11 +15,14 @@ const Home = () => {
         <EventItems />
         <Gallery />
       </Container>
-      <div className="bg-[#02011B] h-[848px]">
+      <div className="bg-[#02011B] h-[800px]">
         <Container className="text-white">
           <Pricing />
         </Container>
       </div>
+      <Container className="text-white">
+        <Reviews />
+      </Container>
     </div>
   );
 };
