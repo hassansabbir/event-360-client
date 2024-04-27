@@ -12,7 +12,7 @@ import gallery10 from "../../assets/gallery10.png";
 
 const Gallery = () => {
   return (
-    <div className="my-48 flex justify-center items-center gap-24">
+    <div className="py-56 flex justify-center items-center gap-24">
       <div className="w-5/12">
         <h1 className="text-6xl font-bold">Gallery</h1>
         <p className="my-8 w-full">

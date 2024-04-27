@@ -3,6 +3,7 @@ import Banner from "./Banner";
 import ServicesSection from "./ServicesSection";
 import EventItems from "./EventItems";
 import Gallery from "./Gallery";
+import Pricing from "./Pricing";
 
 const Home = () => {
   return (
@@ -13,6 +14,11 @@ const Home = () => {
         <EventItems />
         <Gallery />
       </Container>
+      <div className="bg-[#02011B] h-[848px]">
+        <Container className="text-white">
+          <Pricing />
+        </Container>
+      </div>
     </div>
   );
 };
