@@ -7,6 +7,7 @@ const ServicesSection = () => {
     queryKey: ["services"],
     queryFn: getServices,
   });
+
   if (isLoading) {
     return <p className="text-white">loadingggg.....</p>;
   }
