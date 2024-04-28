@@ -13,7 +13,8 @@ const EventItems = () => {
   if (isError) {
     return <p className="text-white">Something wwwent wrong</p>;
   }
-  console.log(isLoading, data);
+  // console.log(isLoading, data);
+
   return (
     <div className="md:px-32">
       <div className="text-center">

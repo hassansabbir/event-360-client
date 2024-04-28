@@ -7,7 +7,7 @@ import { FaHome } from "react-icons/fa";
 const AdminSidebar = () => {
   return (
     <aside className="bg-blue-950 p-5 col-span-2 h-screen sticky top-0 left-0 overflow-auto">
-      <p className="my-10 text-xl">
+      <p className="my-10 hidden md:block text-xl">
         Welcome to Admin Dashboard. Here you can manage all your website
         properties.
       </p>
@@ -15,7 +15,7 @@ const AdminSidebar = () => {
         <NavLink
           className={({ isActive }) =>
             cn(
-              "bg-gray p-3 rounded-md shadow-md hover:bg-dark-gray transition-all hover:text-white flex items-center gap-2",
+              "bg-gray md:p-3 p-1 rounded-md shadow-md hover:bg-dark-gray transition-all hover:text-white flex items-center gap-2",
               {
                 "bg-blue-800 shadow-2xl text-white": isActive,
               }
@@ -29,7 +29,7 @@ const AdminSidebar = () => {
         <NavLink
           className={({ isActive }) =>
             cn(
-              "bg-gray p-3 rounded-md shadow-md hover:bg-dark-gray transition-all hover:text-white flex items-center gap-2",
+              "bg-gray md:p-3 p-1 rounded-md shadow-md hover:bg-dark-gray transition-all hover:text-white flex items-center gap-2",
               {
                 "bg-blue-800 shadow-2xl text-white": isActive,
               }
@@ -43,7 +43,7 @@ const AdminSidebar = () => {
         <NavLink
           className={({ isActive }) =>
             cn(
-              "bg-gray p-3 rounded-md shadow-md hover:bg-dark-gray transition-all hover:text-white flex items-center gap-2",
+              "bg-gray md:p-3 p-1 rounded-md shadow-md hover:bg-dark-gray transition-all hover:text-white flex items-center gap-2",
               {
                 "bg-blue-800 shadow-2xl text-white": isActive,
               }
@@ -57,7 +57,7 @@ const AdminSidebar = () => {
         <NavLink
           className={({ isActive }) =>
             cn(
-              "bg-gray p-3 rounded-md shadow-md hover:bg-dark-gray transition-all hover:text-white flex items-center gap-2",
+              "bg-gray md:p-3 p-1 rounded-md shadow-md hover:bg-dark-gray transition-all hover:text-white flex items-center gap-2",
               {
                 "bg-blue-800 shadow-2xl text-white": isActive,
               }
