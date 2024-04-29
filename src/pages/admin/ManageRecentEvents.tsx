@@ -13,6 +13,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const ManageRecentEvents = () => {
   const { data, isLoading, isError } = useQuery({
@@ -42,9 +43,11 @@ const ManageRecentEvents = () => {
         together!
       </p>
       <div className="text-center my-10">
-        <Button className="text-black h-12 rounded-xl text-lg font-bold bg-gradient-to-r from-gradientFrom to-gradientTo">
-          <MdAdd className="w-6 h-6 me-1" /> Add an Event
-        </Button>
+        <Link to="/admin/manage-recentEvents/add-event">
+          <Button className="text-black h-12 rounded-xl text-lg font-bold bg-gradient-to-r from-gradientFrom to-gradientTo">
+            <MdAdd className="w-6 h-6 me-1" /> Add an Event
+          </Button>
+        </Link>
       </div>
       <div>
         <Table>

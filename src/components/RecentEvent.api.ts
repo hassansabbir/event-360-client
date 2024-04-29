@@ -10,3 +10,8 @@ export type TRecentEvent = {
   eventName: number;
   arrangedBy: string;
 };
+export type TRecentEventPost = {
+  eventName: number;
+  imgUrl: string;
+  arrangedBy: string;
+};

@@ -4,6 +4,7 @@ import About from "@/pages/About";
 import ManageEventItem from "@/pages/admin/ManageEventItem";
 import ManageRecentEvents from "@/pages/admin/ManageRecentEvents";
 import ManageServices from "@/pages/admin/ManageServices";
+import AddRecentEvent from "@/pages/admin/recentEvents/AddRecentEvent";
 import Home from "@/pages/home";
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "manage-recentEvents",
         element: <ManageRecentEvents />,
+      },
+      {
+        path: "manage-recentEvents/add-event",
+        element: <AddRecentEvent />,
       },
       {
         path: "manage-eventItems",
