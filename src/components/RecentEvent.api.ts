@@ -9,9 +9,11 @@ export type TRecentEvent = {
   imgUrl: string;
   eventName: number;
   arrangedBy: string;
+  status: string;
 };
 export type TRecentEventPost = {
   eventName: number;
   imgUrl: string;
   arrangedBy: string;
+  status: string;
 };

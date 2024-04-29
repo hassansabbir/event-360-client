@@ -14,14 +14,37 @@ import { useQuery } from "@tanstack/react-query";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const ManageRecentEvents = () => {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ["recent-events"],
     queryFn: getRecentEvents,
   });
 
   const recentEvents = data?.data?.data;
+
+  const handleDelete = (event: TRecentEvent) => {
+    fetch(`http://localhost:5000/recent-event/${event?._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: `${event?.eventName} is Deleted.`,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+        }
+      });
+  };
 
   if (isLoading) {
     return <span className="loading loading-spinner loading-lg"></span>;
@@ -64,7 +87,7 @@ const ManageRecentEvents = () => {
             {recentEvents?.map((event: TRecentEvent) => (
               <TableRow key={event._id}>
                 <TableCell>
-                  <img src={event?.imgUrl} alt="" />
+                  <img className="w-full h-12" src={event?.imgUrl} alt="" />
                 </TableCell>
                 <TableCell className="">{event?.eventName}</TableCell>
                 <TableCell className="">{event?.arrangedBy}</TableCell>
@@ -72,7 +95,10 @@ const ManageRecentEvents = () => {
                   <Button className="bg-blue-900 space-x-1">
                     <FaEdit /> <span className="hidden md:block">Edit</span>
                   </Button>
-                  <Button className="bg-red-600 space-x-1">
+                  <Button
+                    onClick={() => handleDelete(event)}
+                    className="bg-red-600 space-x-1"
+                  >
                     <FaTrash /> <span className="hidden md:block">Delete</span>
                   </Button>
                 </TableCell>

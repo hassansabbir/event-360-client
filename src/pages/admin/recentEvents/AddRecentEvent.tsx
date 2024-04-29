@@ -41,7 +41,11 @@ const AddRecentEvent = () => {
   console.log(isError, isSuccess);
 
   const onSubmit = async (data: FormEvent) => {
-    await mutateAsync(data);
+    const newAddedData = {
+      ...data,
+      status: "onAir",
+    };
+    await mutateAsync(newAddedData);
   };
 
   return (
