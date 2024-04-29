@@ -67,6 +67,28 @@ const ManageEventItem = () => {
   }
   console.log(isLoading, data);
 
+  const handleDelete = (item: TEventItems) => {
+    fetch(`http://localhost:5000/eventItems/${item?._id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: `${item?.itemName} is Deleted.`,
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+        }
+      });
+  };
+
   return (
     <div>
       <h1 className="text-6xl font-bold text-center my-10">Event Items</h1>
@@ -151,7 +173,7 @@ const ManageEventItem = () => {
               <button>
                 <FaEdit className="w-7 h-7" />
               </button>
-              <button>
+              <button onClick={() => handleDelete(item)}>
                 <FaTrash className="w-7 h-7 text-red-500" />
               </button>
             </div>
