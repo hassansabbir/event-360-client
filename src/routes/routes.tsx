@@ -5,6 +5,7 @@ import ManageEventItem from "@/pages/admin/ManageEventItem";
 import ManageRecentEvents from "@/pages/admin/ManageRecentEvents";
 import ManageServices from "@/pages/admin/ManageServices";
 import AddRecentEvent from "@/pages/admin/recentEvents/AddRecentEvent";
+import UpdateRecentEvent from "@/pages/admin/recentEvents/UpdateRecentEvent";
 import Home from "@/pages/home";
 import { Navigate, createBrowserRouter } from "react-router-dom";
 
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
       {
         path: "manage-recentEvents/add-event",
         element: <AddRecentEvent />,
+      },
+      {
+        path: "manage-recentEvents/updateEvent/:id",
+        element: <UpdateRecentEvent />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/recent-event/${params.id}`),
       },
       {
         path: "manage-eventItems",

@@ -92,9 +92,13 @@ const ManageRecentEvents = () => {
                 <TableCell className="">{event?.eventName}</TableCell>
                 <TableCell className="">{event?.arrangedBy}</TableCell>
                 <TableCell className="text-right  space-x-3">
-                  <Button className="bg-blue-900 space-x-1">
-                    <FaEdit /> <span className="hidden md:block">Edit</span>
-                  </Button>
+                  <Link
+                    to={`/admin/manage-recentEvents/updateEvent/${event?._id}`}
+                  >
+                    <Button className="bg-blue-900 space-x-1">
+                      <FaEdit /> <span className="hidden md:block">Edit</span>
+                    </Button>
+                  </Link>
                   <Button
                     onClick={() => handleDelete(event)}
                     className="bg-red-600 space-x-1"
