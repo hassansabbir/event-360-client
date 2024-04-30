@@ -92,8 +92,10 @@ const ManageEventItem = () => {
 
   return (
     <div>
-      <h1 className="text-6xl font-bold text-center my-10">Event Items</h1>
-      <p className="text-xl mx-auto text-center md:w-[95ch]">
+      <h1 className="md:text-6xl text-2xl font-bold text-center my-10">
+        Event Items
+      </h1>
+      <p className="md:text-xl px-2 mx-auto text-center md:w-[95ch]">
         Welcome to the 'Event Items' page of your admin dashboard! Here, you
         have full control over the instruments and event items featured on your
         website. Whether it's adding new instruments, updating existing event
@@ -101,7 +103,7 @@ const ManageEventItem = () => {
         destination for curating an exceptional experience for your audience.
         Let's showcase the best of what you have to offer!
       </p>
-      <div className="bg-indigo-950 mx-20 my-20 rounded-3xl p-10">
+      <div className="bg-indigo-950 md:mx-20 my-20 rounded-3xl p-10">
         <h1 className="text-3xl">Add an Item</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="my-5">
           <div>

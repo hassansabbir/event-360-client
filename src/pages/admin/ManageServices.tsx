@@ -114,8 +114,10 @@ const ManageServices = () => {
 
   return (
     <div className="md:w-[1240px] mx-auto">
-      <h1 className="text-6xl font-bold text-center my-10">Services</h1>
-      <p className="text-xl mx-auto text-center w-[95ch]">
+      <h1 className="md:text-6xl text-2xl font-bold text-center my-10">
+        Services
+      </h1>
+      <p className="md:text-xl px-2 mx-auto text-center md:w-[95ch]">
         Welcome to the 'Services' page of your admin dashboard! Here, you have
         the power to manage all the services offered on your website with ease.
         From introducing new services to updating existing ones and ensuring
@@ -123,7 +125,7 @@ const ManageServices = () => {
         page serves as your command center for delivering exceptional value.
         Let's craft unforgettable experiences together!
       </p>
-      <div className="bg-indigo-950 mx-20 my-20 rounded-3xl p-10">
+      <div className="bg-indigo-950 md:mx-20 my-20 rounded-3xl p-10">
         <h1 className="text-3xl">Add a Service</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="my-5">
           <div>
@@ -203,9 +205,12 @@ const ManageServices = () => {
               {features.map((feature, index) => (
                 <li
                   key={index}
-                  className="flex items-center justify-between bg-slate-600 rounded-full py-2 px-5"
+                  className="flex items-center my-2 justify-between bg-slate-600 rounded-full py-2 px-5"
                 >
-                  <span>{feature}</span>
+                  <p>
+                    <span className="me-2">{index + 1}</span>
+                    {feature}
+                  </p>
                   <button
                     onClick={() => handleRemoveFeature(index)}
                     className="ml-2 text-red-600"

@@ -54,14 +54,16 @@ const UpdateRecentEvent = () => {
 
   return (
     <div>
-      <h1 className="text-6xl font-bold text-center my-10">Update Events</h1>
-      <p className="text-xl mx-auto text-center md:w-[95ch]">
+      <h1 className="md:text-6xl text-2xl font-bold text-center my-10">
+        Update Events
+      </h1>
+      <p className="md:text-xl px-2 mx-auto text-center md:w-[95ch]">
         Welcome to the "Update Recent Event" page! Here, you can effortlessly
         edit the details of your recent events. Simply select the event you wish
         to update, make the desired changes, and click "Save". It's that easy!
         Keep your event listings up-to-date and engaging for your audience.
       </p>
-      <div className="bg-blue-950 w-[700px] p-10 rounded-3xl my-20 mx-auto">
+      <div className="bg-blue-950 md:w-[700px] p-10 rounded-3xl my-20 mx-auto">
         <h2 className="text-2xl font-semibold">Please input your details</h2>
         <div className="divider"></div>
         <form onSubmit={handleSubmit(onSubmit)} className="my-5">

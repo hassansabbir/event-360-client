@@ -56,10 +56,10 @@ const UpdateEventItems = () => {
 
   return (
     <div>
-      <h1 className="text-6xl font-bold text-center my-10">
+      <h1 className="md:text-6xl text-2xl font-bold text-center my-10">
         Update Event Items
       </h1>
-      <p className="text-xl mx-auto text-center md:w-[95ch]">
+      <p className="md:text-xl px-2 mx-auto text-center md:w-[95ch]">
         Welcome to the "Update Event Item" page! Here, you have the power to
         fine-tune the details of your event items with ease. Whether it's
         adjusting instrument names, updating descriptions, or refreshing images,
@@ -68,7 +68,7 @@ const UpdateEventItems = () => {
         click "Save". Let's ensure every event item shines brightly on your
         platform!
       </p>
-      <div className="bg-blue-950 w-[700px] p-10 rounded-3xl my-20 mx-auto">
+      <div className="bg-blue-950 md:w-[700px] p-10 rounded-3xl my-20 mx-auto">
         <h2 className="text-2xl font-semibold">Please input your details</h2>
         <div className="divider"></div>
         <form onSubmit={handleSubmit(onSubmit)} className="my-5">

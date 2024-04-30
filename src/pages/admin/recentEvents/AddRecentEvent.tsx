@@ -50,13 +50,15 @@ const AddRecentEvent = () => {
 
   return (
     <div>
-      <h1 className="text-6xl font-bold text-center my-10">Add an Event</h1>
-      <p className="text-xl mx-auto text-center w-[100ch]">
+      <h1 className="md:text-6xl text-2xl font-bold text-center my-10">
+        Add an Event
+      </h1>
+      <p className="md:text-xl px-2 mx-auto text-center md:w-[100ch]">
         Welcome to 'Add Recent Event'! Here, you can swiftly add new events to
         your website. Just input some details and voila! Your event is ready to
         captivate your audience. Let's make every event count!
       </p>
-      <div className="bg-blue-950 w-[700px] p-10 rounded-3xl my-20 mx-auto">
+      <div className="bg-blue-950 md:w-[700px] p-10 rounded-3xl my-20 mx-auto">
         <h2 className="text-2xl font-semibold">Please input your details</h2>
         <div className="divider"></div>
         <form onSubmit={handleSubmit(onSubmit)} className="my-5">

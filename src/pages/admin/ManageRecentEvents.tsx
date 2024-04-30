@@ -56,8 +56,10 @@ const ManageRecentEvents = () => {
 
   return (
     <div>
-      <h1 className="text-6xl font-bold text-center my-10">Recent Events</h1>
-      <p className="text-xl mx-auto text-center w-[100ch]">
+      <h1 className="md:text-6xl text-2xl font-bold text-center my-10">
+        Recent Events
+      </h1>
+      <p className="md:text-xl px-3 mx-auto text-center md:w-[100ch]">
         Welcome to the 'Recent Events' page of the admin dashboard! Here, you
         can effortlessly manage all the latest events showcased on your website.
         From adding exciting new events to updating existing ones and even
@@ -74,7 +76,6 @@ const ManageRecentEvents = () => {
       </div>
       <div>
         <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
           <TableHeader>
             <TableRow>
               <TableHead className="w-[100px]"></TableHead>
