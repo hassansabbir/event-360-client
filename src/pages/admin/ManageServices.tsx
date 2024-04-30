@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { MdAdd } from "react-icons/md";
 import Swal from "sweetalert2";
 
 const ManageServices = () => {
@@ -34,7 +35,7 @@ const ManageServices = () => {
 
   const { mutateAsync, isSuccess } = useMutation({
     mutationFn: async (data) => {
-      return await fetch("http://localhost:5000/services", {
+      return await fetch("http://localhost:5000/add-services", {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
@@ -54,6 +55,8 @@ const ManageServices = () => {
           }
           reset();
           refetch();
+          setNewFeature("");
+          setFeatures([]);
         });
     },
   });
@@ -83,7 +86,7 @@ const ManageServices = () => {
 
   return (
     <div className="md:w-[1240px] mx-auto">
-      <h1 className="text-6xl font-bold text-center my-10">Recent Events</h1>
+      <h1 className="text-6xl font-bold text-center my-10">Services</h1>
       <p className="text-xl mx-auto text-center w-[95ch]">
         Welcome to the 'Services' page of your admin dashboard! Here, you have
         the power to manage all the services offered on your website with ease.
@@ -141,22 +144,36 @@ const ManageServices = () => {
             <label className="text-xl" htmlFor="features">
               Features:
             </label>
-            <input
-              type="text"
-              value={newFeature}
-              onChange={(e) => setNewFeature(e.target.value)}
-              placeholder="Enter a feature"
-              className="rounded w-full my-1 bg-slate-500 p-2 active:border-none"
-            />
-            <button type="button" onClick={handleAddFeature}>
-              Add Feature
-            </button>
+            <div className="relative">
+              <input
+                type="text"
+                value={newFeature}
+                onChange={(e) => setNewFeature(e.target.value)}
+                placeholder="Enter a feature"
+                className="rounded w-full my-1 bg-slate-500 p-2 active:border-none"
+              />
+              <button
+                type="button"
+                onClick={handleAddFeature}
+                className="absolute top-1/2 transform -translate-y-1/2 right-2 bg-transparent border-none cursor-pointer"
+              >
+                <MdAdd className="w-6 h-6 me-1 " />
+              </button>
+            </div>
           </div>
           {/* List of features */}
           <div>
-            <ul>
+            <ul className="p-5 bg-indigo-900 my-5 rounded-3xl">
+              {features.length ? (
+                <p>Features:</p>
+              ) : (
+                <p>Please add some Features</p>
+              )}
               {features.map((feature, index) => (
-                <li key={index}>{feature}</li>
+                <li key={index}>
+                  <span className="me-2">{index + 1}</span>
+                  {feature}
+                </li>
               ))}
             </ul>
           </div>
