@@ -6,7 +6,7 @@ export const getEventItems = async () => {
 
 export type TEventItems = {
   _id: string;
-  eventItem: number;
+  eventItem: string;
   itemName: string;
   imageUrl: string;
 };

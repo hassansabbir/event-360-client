@@ -4,6 +4,7 @@ import About from "@/pages/About";
 import ManageEventItem from "@/pages/admin/ManageEventItem";
 import ManageRecentEvents from "@/pages/admin/ManageRecentEvents";
 import ManageServices from "@/pages/admin/ManageServices";
+import UpdateEventItems from "@/pages/admin/eventItems/UpdateEventItems";
 import AddRecentEvent from "@/pages/admin/recentEvents/AddRecentEvent";
 import UpdateRecentEvent from "@/pages/admin/recentEvents/UpdateRecentEvent";
 import Home from "@/pages/home";
@@ -49,6 +50,12 @@ const router = createBrowserRouter([
       {
         path: "manage-eventItems",
         element: <ManageEventItem />,
+      },
+      {
+        path: "manage-eventItems/updateEvent/:id",
+        element: <UpdateEventItems />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/eventItems/${params.id}`),
       },
       {
         path: "manage-services",

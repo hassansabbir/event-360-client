@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { FormEvent } from "react";
 import { useForm } from "react-hook-form";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const ManageEventItem = () => {
@@ -170,9 +171,11 @@ const ManageEventItem = () => {
               {item?.eventItem} {item?.itemName}
             </h1>
             <div className="flex items-center my-4 justify-center gap-5">
-              <button>
-                <FaEdit className="w-7 h-7" />
-              </button>
+              <Link to={`/admin/manage-eventItems/updateEvent/${item?._id}`}>
+                <button>
+                  <FaEdit className="w-7 h-7" />
+                </button>
+              </Link>
               <button onClick={() => handleDelete(item)}>
                 <FaTrash className="w-7 h-7 text-red-500" />
               </button>
