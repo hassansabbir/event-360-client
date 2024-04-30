@@ -25,8 +25,8 @@ const EventItems = () => {
         </p>
       </div>
       <div className="grid gap-5 grid-cols-1 md:grid-cols-3">
-        {data?.data?.data?.map((item: TEventItems) => (
-          <div className="p-5 bg-black rounded-xl">
+        {data?.data?.data?.map((item: TEventItems, i: number) => (
+          <div key={i} className="p-5 bg-black rounded-xl">
             <h1 className="text-2xl mb-3 font-bold">
               Event Item - {item?.eventItem}
             </h1>

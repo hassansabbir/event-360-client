@@ -24,7 +24,7 @@ const RecentEvent = () => {
   if (isError) {
     return <p className="text-white">Something went wrong</p>;
   }
-  console.log(isLoading, data);
+  // console.log(isLoading, data);
 
   return (
     <div>
@@ -42,8 +42,8 @@ const RecentEvent = () => {
           modules={[Navigation]}
           className="mySwiper"
         >
-          {data?.data?.data?.map((e: TRecentEvent) => (
-            <SwiperSlide className="bg-[#02011B]  flex flex-col">
+          {data?.data?.data?.map((e: TRecentEvent, i: number) => (
+            <SwiperSlide key={i} className="bg-[#02011B]  flex flex-col">
               <img src={e?.imgUrl} alt="" />
               <div className="p-5 text-start">
                 <h1 className="text-lg">{e?.eventName}</h1>

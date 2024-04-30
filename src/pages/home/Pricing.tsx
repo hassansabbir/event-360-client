@@ -15,21 +15,24 @@ const Pricing = () => {
   if (isError) {
     return <p className="text-white">Something wwwent wrong</p>;
   }
-  console.log(isLoading, data);
+  // console.log(isLoading, data);
 
   return (
     <div>
       <h5 className="text-xl text-center">PRICING</h5>
       <h1 className="text-6xl font-bold my-5 text-center">Package Pricing</h1>
       <div className="grid grid-cols-1 gap-10 my-10 md:grid-cols-3">
-        {data?.data?.data?.map((p: TPackage) => (
-          <div className="bg-gray-900 hover:bg-[#0038B4] flex flex-col p-14 rounded-lg">
+        {data?.data?.data?.map((p: TPackage, i: number) => (
+          <div
+            key={i}
+            className="bg-gray-900 hover:bg-[#0038B4] flex flex-col p-14 rounded-lg"
+          >
             <div>
               <h1 className="text-xl uppercase">{p?.packageName}</h1>
               <h1 className="text-[40px] font-bold my-5">${p?.price}</h1>
               <div className="my-5">
-                {p?.features?.map((i) => (
-                  <p className="flex items-center gap-4">
+                {p?.features?.map((i, index: number) => (
+                  <p key={index} className="flex items-center gap-4">
                     <span className="text-xl my-2">
                       <RiCheckFill className="text-green-500 border border-primary rounded-full" />
                     </span>

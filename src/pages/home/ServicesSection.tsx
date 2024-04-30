@@ -25,8 +25,8 @@ const ServicesSection = () => {
         </p>
       </div>
       <div className="grid gap-5 grid-cols-1 lg:grid-cols-3">
-        {data?.data.data.map((item: TService) => (
-          <div className="bg-[#02011B] rounded-lg p-5">
+        {data?.data.data.map((item: TService, i: number) => (
+          <div key={i} className="bg-[#02011B] rounded-lg p-5">
             <ServiceSectionCard props={item} />
           </div>
         ))}

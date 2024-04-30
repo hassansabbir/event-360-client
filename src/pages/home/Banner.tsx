@@ -24,7 +24,7 @@ const Banner = () => {
     return <p className="text-white">Something wwwent wrong</p>;
   }
 
-  console.log({ isLoading, data });
+  // console.log({ isLoading, data });
   const bgImg = {
     backgroundImage: `url(${bannerImg})`,
     backgroundSize: "cover",
@@ -54,8 +54,8 @@ const Banner = () => {
         </h1>
         <div className="h-[600px]">
           <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
-            {data?.data?.data?.map((item: TService) => (
-              <SwiperSlide className="flex flex-col p-10 ">
+            {data?.data?.data?.map((item: TService, index: number) => (
+              <SwiperSlide key={index} className="flex flex-col p-10 ">
                 <ServiceCard props={item} />
                 <div className="w-full md:mt-auto">
                   <Button className="w-full text-black h-12 rounded-none text-lg font-bold bg-gradient-to-r from-gradientFrom to-gradientTo">

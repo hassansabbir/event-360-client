@@ -15,8 +15,8 @@ const ServiceCard: React.FC<{ props: ServiceCardProps }> = ({ props }) => {
       </div>
       <div className="text-start items-start my-7">
         <h1 className="md:text-3xl text-xl mb-5">{title}</h1>
-        {features?.map((f) => (
-          <p className="flex text-sm items-center gap-4">
+        {features?.map((f, i: number) => (
+          <p key={i} className="flex text-sm items-center gap-4">
             <span className="">
               <RiCheckFill className="text-green-500 border border-primary rounded-full" />
             </span>{" "}

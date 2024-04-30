@@ -18,15 +18,15 @@ const Reviews = () => {
   if (isError) {
     return <p className="text-white">Something wwwent wrong</p>;
   }
-  console.log(isLoading, data);
+  // console.log(isLoading, data);
 
   return (
     <div className="py-20">
       <h1 className="text-6xl">What everyone says</h1>
       <div className="my-14">
         <Swiper slidesPerView={3} spaceBetween={30} className="mySwiper">
-          {data?.data?.data?.map((item: TReview) => (
-            <SwiperSlide>
+          {data?.data?.data?.map((item: TReview, i: number) => (
+            <SwiperSlide key={i}>
               <div className="bg-[#02011B] flex flex-col p-10 text-left w-[412px] h-[330px]">
                 <p className="text-xl ">{item?.review}</p>
                 <div className="flex gap-5 mt-auto">
