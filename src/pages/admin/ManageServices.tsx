@@ -227,8 +227,8 @@ const ManageServices = () => {
         </form>
       </div>
       <div className="grid gap-5 grid-cols-1 md:grid-cols-3">
-        {services?.map((service: TService) => (
-          <div className="bg-slate-900 p-5 rounded-2xl">
+        {services?.map((service: TService, index: number) => (
+          <div key={index} className="bg-slate-900 p-5 rounded-2xl">
             <ServiceCard props={service} />
             <div className="flex items-center my-4 justify-center gap-5">
               <button>

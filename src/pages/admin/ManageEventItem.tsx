@@ -160,8 +160,8 @@ const ManageEventItem = () => {
         </form>
       </div>
       <div className="grid gap-5 px-10 grid-cols-1 md:grid-cols-4">
-        {eventItems?.map((item: TEventItems) => (
-          <div className="bg-indigo-950 rounded-2xl p-3">
+        {eventItems?.map((item: TEventItems, index: number) => (
+          <div key={index} className="bg-indigo-950 rounded-2xl p-3">
             <img
               className="w-full rounded-2xl md:h-[220px]"
               src={item?.imageUrl}
