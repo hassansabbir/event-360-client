@@ -25,7 +25,7 @@ const Pricing = () => {
         {data?.data?.data?.map((p: TPackage, i: number) => (
           <div
             key={i}
-            className="bg-gray-900 hover:bg-[#0038B4] flex flex-col p-14 rounded-lg"
+            className="bg-gray-900 hover:bg-[#0038B4] hover:scale-105 transition-all hover:shadow-lg hover:shadow-blue-500 flex flex-col p-14 rounded-lg"
           >
             <div>
               <h1 className="text-xl uppercase">{p?.packageName}</h1>

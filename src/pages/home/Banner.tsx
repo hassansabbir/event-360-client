@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useQuery } from "@tanstack/react-query";
 import bannerImg from "../../assets/bannerImg.png";
 import { TService, getServices } from "@/components/Service.api";
-
+import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -25,6 +25,27 @@ const Banner = () => {
   }
 
   // console.log({ isLoading, data });
+
+  const titleText = {
+    hidden: { opacity: 0, x: -200 },
+    visible: {
+      x: 0,
+
+      opacity: 1,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
+  const titleDescription = {
+    hidden: { opacity: 0, x: -200 },
+    visible: {
+      opacity: 1,
+      x: 0,
+    },
+  };
+
   const bgImg = {
     backgroundImage: `url(${bannerImg})`,
     backgroundSize: "cover",
@@ -38,15 +59,23 @@ const Banner = () => {
         style={bgImg}
         className="text-white md:w-[736px] md:h-[708px] flex items-end"
       >
-        <div className="bg-gradient-to-t from-black pt-40 md:px-10 px-4 pb-10">
-          <h1 className="md:text-5xl text-2xl font-semibold mb-3">
+        <motion.div
+          variants={titleText}
+          initial="hidden"
+          animate="visible"
+          className="bg-gradient-to-t from-black pt-40 md:px-10 px-4 pb-10"
+        >
+          <motion.h1
+            variants={titleDescription}
+            className="md:text-5xl text-2xl font-semibold mb-3"
+          >
             New Packages For Winter
-          </h1>
-          <p className="md:text-lg text-sm">
+          </motion.h1>
+          <motion.p variants={titleDescription} className="md:text-lg text-sm">
             Ut posuere felis arcu tellus tempus in in ultricies. Gravida id nibh
             ornare viverra. Ultrices faucibus neque velit risus ac id lorem.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </div>
       <div className="text-white md:p-10 md:w-[520px]">
         <h1 className="font-bold border-b-2 border-[#344E71] text-2xl pb-6 text-center">

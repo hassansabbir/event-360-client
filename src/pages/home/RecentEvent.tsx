@@ -44,10 +44,12 @@ const RecentEvent = () => {
         >
           {data?.data?.data?.map((e: TRecentEvent, i: number) => (
             <SwiperSlide key={i} className="bg-[#02011B]  flex flex-col">
-              <img src={e?.imgUrl} alt="" />
+              <div className="h-[200px] w-full">
+                <img src={e?.imgUrl} alt="" />
+              </div>
               <div className="p-5 text-start">
                 <h1 className="text-lg">{e?.eventName}</h1>
-                <h3 className="text-md text-slate-600">{e?.arrangedBy}</h3>
+                <h3 className="text-md text-slate-600">by {e?.arrangedBy}</h3>
               </div>
             </SwiperSlide>
           ))}

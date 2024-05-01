@@ -1,5 +1,7 @@
 import { RiCheckFill } from "react-icons/ri";
 import { Button } from "./ui/button";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 interface ServiceCardProps {
   bannerImg: string;
@@ -8,9 +10,23 @@ interface ServiceCardProps {
 }
 
 const ServiceCard: React.FC<{ props: ServiceCardProps }> = ({ props }) => {
+  const componentRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: componentRef,
+    offset: ["0 1", "1.2 1"],
+  });
+
+  const style = {
+    scale: useTransform(scrollYProgress, [0, 1], [0.5, 1]),
+  };
+
   const { bannerImg, title, features } = props;
   return (
-    <div className="flex flex-col h-[569px]">
+    <motion.div
+      style={style}
+      ref={componentRef}
+      className="flex flex-col h-[569px]"
+    >
       <div className="md:w-[362px] md:h-[253px]">
         <img className="w-full h-[253px]" src={bannerImg} alt="" />
       </div>
@@ -30,7 +46,7 @@ const ServiceCard: React.FC<{ props: ServiceCardProps }> = ({ props }) => {
           Check It Out
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

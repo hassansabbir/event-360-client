@@ -1,7 +1,19 @@
 import { TEventItems, getEventItems } from "@/components/EventItem.api";
 import { useQuery } from "@tanstack/react-query";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 const EventItems = () => {
+  const componentRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: componentRef,
+    offset: ["0 1", "1.2 1"],
+  });
+
+  const style = {
+    scale: useTransform(scrollYProgress, [0, 1], [0.3, 1]),
+  };
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["eventItems"],
     queryFn: getEventItems,
@@ -26,12 +38,21 @@ const EventItems = () => {
       </div>
       <div className="grid gap-5 grid-cols-1 md:grid-cols-3">
         {data?.data?.data?.map((item: TEventItems, i: number) => (
-          <div key={i} className="p-5 bg-black rounded-xl">
+          <motion.div
+            style={style}
+            ref={componentRef}
+            key={i}
+            className="p-5 bg-black rounded-xl"
+          >
             <h1 className="text-2xl mb-3 font-bold">
               Event Item - {item?.eventItem}
             </h1>
-            <img className="w-[292px] h-[196px]" src={item?.imageUrl} alt="" />
-          </div>
+            <img
+              className="w-[292px] h-[196px] object-cover"
+              src={item?.imageUrl}
+              alt=""
+            />
+          </motion.div>
         ))}
       </div>
     </div>
