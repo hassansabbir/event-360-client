@@ -7,6 +7,8 @@ import Pricing from "./Pricing";
 import Reviews from "./Reviews";
 import RecentEvent from "./RecentEvent";
 import Footer from "@/components/layouts/Footer";
+import ContactUs from "./ContactUs";
+import Donation from "./Donation";
 
 const Home = () => {
   return (
@@ -25,6 +27,8 @@ const Home = () => {
       <Container className="text-white">
         <Reviews />
         <RecentEvent />
+        <Donation />
+        <ContactUs />
         <Footer />
       </Container>
     </div>

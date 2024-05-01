@@ -1,5 +1,4 @@
 import { TEventItems } from "@/components/EventItem.api";
-import { TRecentEvent } from "@/components/RecentEvent.api";
 import { Button } from "@/components/ui/button";
 import { FormEvent } from "react";
 import { useForm } from "react-hook-form";
@@ -7,7 +6,7 @@ import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const UpdateEventItems = () => {
-  const itemDetails = useLoaderData() as TRecentEvent | undefined;
+  const itemDetails = useLoaderData() as TEventItems | undefined;
   console.log(itemDetails?.data);
   const navigate = useNavigate();
   const location = useLocation();

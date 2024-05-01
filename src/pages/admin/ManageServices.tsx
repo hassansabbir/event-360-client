@@ -2,8 +2,8 @@ import { TService, getServices } from "@/components/Service.api";
 import ServiceCard from "@/components/ServiceSectionCard";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { FormEvent, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import Swal from "sweetalert2";
@@ -71,7 +71,7 @@ const ManageServices = () => {
     console.log("Event Item Added Successfully!");
   }
 
-  const onSubmit = async (data: FormEvent) => {
+  const onSubmit = async (data: FieldValues) => {
     const newAddedData = {
       ...data,
       features: features,

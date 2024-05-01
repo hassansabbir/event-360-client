@@ -9,4 +9,5 @@ export type TEventItems = {
   eventItem: string;
   itemName: string;
   imageUrl: string;
+  status: string;
 };

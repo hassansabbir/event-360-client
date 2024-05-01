@@ -1,8 +1,7 @@
 import { TEventItems, getEventItems } from "@/components/EventItem.api";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { FormEvent } from "react";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -50,7 +49,7 @@ const ManageEventItem = () => {
     console.log("Event Item Added Successfully!");
   }
 
-  const onSubmit = async (data: FormEvent) => {
+  const onSubmit = async (data: FieldValues) => {
     const newAddedData = {
       ...data,
       status: "onAir",
