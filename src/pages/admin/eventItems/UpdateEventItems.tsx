@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const UpdateEventItems = () => {
   const itemDetails = useLoaderData() as TEventItems | undefined;
-  console.log(itemDetails?.data);
+  // console.log(itemDetails?.data);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,9 +23,9 @@ const UpdateEventItems = () => {
       ...data,
       status: "onAir",
     };
-    console.log(data);
+    // console.log(data);
     await fetch(
-      `http://localhost:5000/new-eventItems/${itemDetails?.data?._id}`,
+      `https://nlwd-b2-assignment-5-server.vercel.app/new-eventItems/${itemDetails?.data?._id}`,
       {
         method: "PATCH",
         headers: {

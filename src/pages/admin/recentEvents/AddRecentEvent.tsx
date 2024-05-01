@@ -1,11 +1,15 @@
-import { TRecentEvent, TRecentEventPost } from "@/components/RecentEvent.api";
+import { TRecentEvent } from "@/components/RecentEvent.api";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { FormEvent } from "react";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const AddRecentEvent = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const {
     register,
     handleSubmit,
@@ -15,13 +19,16 @@ const AddRecentEvent = () => {
 
   const { mutateAsync, isError, isSuccess } = useMutation({
     mutationFn: async (data) => {
-      return await fetch("http://localhost:5000/recent-event", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      return await fetch(
+        "https://nlwd-b2-assignment-5-server.vercel.app/recent-event",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -34,11 +41,12 @@ const AddRecentEvent = () => {
             });
           }
           reset();
+          navigate("/admin/manage-recentEvents", { state: { from: location } });
         });
     },
   });
 
-  console.log(isError, isSuccess);
+  // console.log(isError, isSuccess);
 
   const onSubmit = async (data: FormEvent) => {
     const newAddedData = {

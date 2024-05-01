@@ -30,7 +30,7 @@ const mainBgImg = {
 const Donation = () => {
   return (
     <div style={mainBgImg} className="rounded-3xl">
-      <div className="flex items-center my-20 rounded-3xl gap-10 bg-black bg-opacity-70 px-5 py-20">
+      <div className="md:flex items-center my-20 rounded-3xl gap-10 bg-black bg-opacity-70 px-5 py-20">
         <motion.div
           variants={supportCard}
           initial="initial"
@@ -43,11 +43,11 @@ const Donation = () => {
             alt=""
           />
         </motion.div>
-        <div>
+        <div className="mt-20 md:mt-0">
           <h1 className="text-4xl font bold">
             Stand with Gaza <br /> Support Hope, Rebuild Lives
           </h1>
-          <p className="text-xl my-10 w-[60ch]">
+          <p className="text-xl my-10 md:w-[60ch]">
             In the face of adversity, solidarity shines brightest. Join us in
             standing with Gaza, where every donation becomes a lifeline of hope.
             Your support helps rebuild homes, provide essential medical care,

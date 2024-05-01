@@ -41,13 +41,16 @@ const ManageServices = () => {
 
   const { mutateAsync, isSuccess } = useMutation({
     mutationFn: async (data) => {
-      return await fetch("http://localhost:5000/add-services", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      return await fetch(
+        "https://nlwd-b2-assignment-5-server.vercel.app/add-services",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -91,9 +94,12 @@ const ManageServices = () => {
   }
 
   const handleDelete = (service: TService) => {
-    fetch(`http://localhost:5000/services/${service?._id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://nlwd-b2-assignment-5-server.vercel.app/services/${service?._id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -194,14 +200,14 @@ const ManageServices = () => {
           {/* List of features */}
           <div>
             <ul className="p-5 bg-indigo-900 my-5 rounded-3xl">
-              <p className="my-5">
+              <h2 className="my-5 text-2xl">
                 {" "}
                 {features.length ? (
                   <p>Features:</p>
                 ) : (
                   <p>Please add some Features</p>
                 )}
-              </p>
+              </h2>
               {features.map((feature, index) => (
                 <li
                   key={index}

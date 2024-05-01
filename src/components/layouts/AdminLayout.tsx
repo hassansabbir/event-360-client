@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 
 const AdminLayout = () => {
@@ -8,6 +8,7 @@ const AdminLayout = () => {
       <div className="col-span-10 h-[200vh] text-white">
         <Outlet />
       </div>
+      <ScrollRestoration />
     </div>
   );
 };

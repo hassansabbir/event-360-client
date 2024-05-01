@@ -1,7 +1,9 @@
 import axios from "axios";
 
 export const getPackages = async () => {
-  return await axios.get("http://localhost:5000/packages");
+  return await axios.get(
+    "https://nlwd-b2-assignment-5-server.vercel.app/packages"
+  );
 };
 
 export type TPackage = {

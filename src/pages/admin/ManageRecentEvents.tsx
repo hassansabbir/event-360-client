@@ -24,9 +24,12 @@ const ManageRecentEvents = () => {
   const recentEvents = data?.data?.data;
 
   const handleDelete = (event: TRecentEvent) => {
-    fetch(`http://localhost:5000/recent-event/${event?._id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://nlwd-b2-assignment-5-server.vercel.app/recent-event/${event?._id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -51,7 +54,7 @@ const ManageRecentEvents = () => {
   if (isError) {
     return <p className="text-white">Something went wrong</p>;
   }
-  console.log(isLoading, data);
+  // console.log(isLoading, data);
 
   return (
     <div>
@@ -73,7 +76,7 @@ const ManageRecentEvents = () => {
           </Button>
         </Link>
       </div>
-      <div>
+      <div className="md:mx-20">
         <Table>
           <TableHeader>
             <TableRow>

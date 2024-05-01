@@ -24,7 +24,7 @@ const UpdateRecentEvent = () => {
       status: "onAir",
     };
     await fetch(
-      `http://localhost:5000/full-recent-event/${eventDetails?.data?._id}`,
+      `https://nlwd-b2-assignment-5-server.vercel.app/full-recent-event/${eventDetails?.data?._id}`,
       {
         method: "PATCH",
         headers: {

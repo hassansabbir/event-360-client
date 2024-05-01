@@ -1,7 +1,9 @@
 import axios from "axios";
 
 export const getEventItems = async () => {
-  return await axios.get("http://localhost:5000/eventItems");
+  return await axios.get(
+    "https://nlwd-b2-assignment-5-server.vercel.app/eventItems"
+  );
 };
 
 export type TEventItems = {

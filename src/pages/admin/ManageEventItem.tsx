@@ -21,13 +21,16 @@ const ManageEventItem = () => {
 
   const { mutateAsync, isSuccess } = useMutation({
     mutationFn: async (data) => {
-      return await fetch("http://localhost:5000/eventItems", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      return await fetch(
+        "https://nlwd-b2-assignment-5-server.vercel.app/eventItems",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
@@ -65,12 +68,15 @@ const ManageEventItem = () => {
   if (isError) {
     return <p className="text-white">Something wwwent wrong</p>;
   }
-  console.log(isLoading, data);
+  // console.log(isLoading, data);
 
   const handleDelete = (item: TEventItems) => {
-    fetch(`http://localhost:5000/eventItems/${item?._id}`, {
-      method: "PATCH",
-    })
+    fetch(
+      `https://nlwd-b2-assignment-5-server.vercel.app/eventItems/${item?._id}`,
+      {
+        method: "PATCH",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

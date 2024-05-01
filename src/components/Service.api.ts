@@ -1,7 +1,9 @@
 import axios from "axios";
 
 export const getServices = async () => {
-  return await axios.get("http://localhost:5000/services");
+  return await axios.get(
+    "https://nlwd-b2-assignment-5-server.vercel.app/services"
+  );
 };
 
 export type TService = {
