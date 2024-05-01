@@ -1,17 +1,40 @@
 import { Button } from "@/components/ui/button";
 import palestine from "../../assets/palestine.jpg";
 import { RiRefund2Fill } from "react-icons/ri";
+import { motion } from "framer-motion";
+
+const supportCard = {
+  initial: { y: 0, rotate: 0 },
+  animate: {
+    y: 30,
+    scale: 1,
+    transition: {
+      duration: 1,
+      y: {
+        duration: 1,
+        repeat: Infinity,
+        repeatType: "reverse",
+        ease: "easeInOut",
+      },
+    },
+  },
+};
 
 const Donation = () => {
   return (
     <div className="flex items-center my-20 rounded-3xl gap-10 bg-slate-900 px-5 py-20">
-      <div className="p-2 rounded-3xl bg-slate-500">
+      <motion.div
+        variants={supportCard}
+        initial="initial"
+        animate="animate"
+        className="p-2 rounded-3xl bg-slate-500"
+      >
         <img
           className="w-[400px] h-[400px] rounded-3xl"
           src={palestine}
           alt=""
         />
-      </div>
+      </motion.div>
       <div>
         <h1 className="text-4xl font bold">
           Stand with Gaza <br /> Support Hope, Rebuild Lives
