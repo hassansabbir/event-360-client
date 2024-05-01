@@ -254,7 +254,7 @@ const ManageServices = () => {
               className="w-full text-black h-12 rounded-none text-lg font-bold bg-gradient-to-r from-gradientFrom to-gradientTo"
               type="submit"
             >
-              Edit Event
+              Add Service
             </Button>
           </div>
         </form>
