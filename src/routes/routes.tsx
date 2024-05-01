@@ -45,9 +45,7 @@ const router = createBrowserRouter([
         path: "manage-recentEvents/updateEvent/:id",
         element: <UpdateRecentEvent />,
         loader: ({ params }) =>
-          fetch(
-            `https://nlwd-b2-assignment-5-server.vercel.app/recent-event/${params.id}`
-          ),
+          fetch(`${import.meta.env.VITE_SERVER_API}/recent-event/${params.id}`),
       },
       {
         path: "manage-eventItems",
@@ -57,9 +55,7 @@ const router = createBrowserRouter([
         path: "manage-eventItems/updateEvent/:id",
         element: <UpdateEventItems />,
         loader: ({ params }) =>
-          fetch(
-            `https://nlwd-b2-assignment-5-server.vercel.app/eventItems/${params.id}`
-          ),
+          fetch(`${import.meta.env.VITE_SERVER_API}/eventItems/${params.id}`),
       },
       {
         path: "manage-services",

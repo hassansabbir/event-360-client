@@ -1,9 +1,7 @@
 import axios from "axios";
 
 export const getPackages = async () => {
-  return await axios.get(
-    "https://nlwd-b2-assignment-5-server.vercel.app/packages"
-  );
+  return await axios.get(`${import.meta.env.VITE_SERVER_API}/packages`);
 };
 
 export type TPackage = {

@@ -3,10 +3,12 @@ import ServiceCard from "@/components/ServiceSectionCard";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { MdAdd } from "react-icons/md";
 import Swal from "sweetalert2";
+
+type FormData = TService;
 
 const ManageServices = () => {
   const [newFeature, setNewFeature] = useState<string>("");
@@ -21,7 +23,7 @@ const ManageServices = () => {
     }
   };
 
-  const handleRemoveFeature = (indexToRemove) => {
+  const handleRemoveFeature = (indexToRemove: number) => {
     setFeatures((prevFeatures) =>
       prevFeatures.filter((_, index) => index !== indexToRemove)
     );
@@ -39,44 +41,54 @@ const ManageServices = () => {
     reset,
   } = useForm<TService>();
 
-  const { mutateAsync, isSuccess } = useMutation({
+  const { mutateAsync } = useMutation<FormData, unknown, FormData>({
     mutationFn: async (data) => {
-      return await fetch(
-        "https://nlwd-b2-assignment-5-server.vercel.app/add-services",
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.insertedId) {
-            Swal.fire({
-              title: "Success",
-              text: "New Service Added Successfully",
-              icon: "success",
-              confirmButtonText: "Done",
-            });
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_SERVER_API}/add-services`,
+          {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-          reset();
-          refetch();
-          setNewFeature("");
-          setFeatures([]);
-        });
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to add service");
+        }
+
+        const responseData: TService = await response.json();
+
+        // console.log(responseData);
+
+        if (responseData) {
+          console.log(responseData);
+          Swal.fire({
+            title: "Success",
+            text: "New Service Added Successfully",
+            icon: "success",
+            confirmButtonText: "Done",
+          });
+        }
+
+        reset();
+        refetch();
+        setNewFeature("");
+        setFeatures([]);
+
+        return responseData;
+      } catch (error) {
+        console.error("Error adding service:", error);
+        throw error;
+      }
     },
   });
 
-  if (isSuccess) {
-    console.log("Event Item Added Successfully!");
-  }
-
-  const onSubmit = async (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FormData> = async (formData) => {
     const newAddedData = {
-      ...data,
+      ...formData,
       features: features,
       status: "onAir",
     };
@@ -87,35 +99,44 @@ const ManageServices = () => {
   const services = data?.data?.data;
 
   if (isLoading) {
-    return <p className="text-white">loadingggg.....</p>;
+    return <span>loadinggg</span>;
   }
   if (isError) {
     return <p className="text-white">Something wwwent wrong</p>;
   }
 
   const handleDelete = (service: TService) => {
-    fetch(
-      `https://nlwd-b2-assignment-5-server.vercel.app/services/${service?._id}`,
-      {
-        method: "PATCH",
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount > 0) {
-          refetch();
-          Swal.fire({
-            title: `${service?.title} is Deleted.`,
-            showClass: {
-              popup: "animate__animated animate__fadeInDown",
-            },
-            hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
-            },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_SERVER_API}/services/${service?._id}`, {
+          method: "PATCH",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: `${service?.title} is Deleted.`,
+                showClass: {
+                  popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                  popup: "animate__animated animate__fadeOutUp",
+                },
+              });
+            }
           });
-        }
-      });
+      }
+    });
   };
 
   return (
@@ -218,6 +239,7 @@ const ManageServices = () => {
                     {feature}
                   </p>
                   <button
+                    type="button"
                     onClick={() => handleRemoveFeature(index)}
                     className="ml-2 text-red-600"
                   >

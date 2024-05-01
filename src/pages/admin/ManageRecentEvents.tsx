@@ -24,32 +24,41 @@ const ManageRecentEvents = () => {
   const recentEvents = data?.data?.data;
 
   const handleDelete = (event: TRecentEvent) => {
-    fetch(
-      `https://nlwd-b2-assignment-5-server.vercel.app/recent-event/${event?._id}`,
-      {
-        method: "PATCH",
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount > 0) {
-          refetch();
-          Swal.fire({
-            title: `${event?.eventName} is Deleted.`,
-            showClass: {
-              popup: "animate__animated animate__fadeInDown",
-            },
-            hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
-            },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_SERVER_API}/recent-event/${event?._id}`, {
+          method: "PATCH",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: `${event?.eventName} has been Deleted.`,
+                showClass: {
+                  popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                  popup: "animate__animated animate__fadeOutUp",
+                },
+              });
+            }
           });
-        }
-      });
+      }
+    });
   };
 
   if (isLoading) {
-    return <span className="loading loading-spinner loading-lg"></span>;
+    return <span className="text-white">loadingggg..</span>;
   }
   if (isError) {
     return <p className="text-white">Something went wrong</p>;

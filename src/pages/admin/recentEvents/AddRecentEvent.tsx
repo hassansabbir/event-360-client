@@ -1,10 +1,11 @@
 import { TRecentEvent } from "@/components/RecentEvent.api";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
-import { FormEvent } from "react";
 import Swal from "sweetalert2";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useLocation, useNavigate } from "react-router-dom";
+
+type FormData = TRecentEvent;
 
 const AddRecentEvent = () => {
   const navigate = useNavigate();
@@ -17,40 +18,56 @@ const AddRecentEvent = () => {
     reset,
   } = useForm<TRecentEvent>();
 
-  const { mutateAsync, isError, isSuccess } = useMutation({
+  const { mutateAsync } = useMutation<FormData, unknown, FormData>({
     mutationFn: async (data) => {
-      return await fetch(
-        "https://nlwd-b2-assignment-5-server.vercel.app/recent-event",
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.insertedId) {
-            Swal.fire({
-              title: "Success",
-              text: "New Event Added Successfully",
-              icon: "success",
-              confirmButtonText: "Done",
-            });
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_SERVER_API}/recent-event`,
+          {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-          reset();
-          navigate("/admin/manage-recentEvents", { state: { from: location } });
-        });
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to add recent event");
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.insertedId) {
+          Swal.fire({
+            title: "Success",
+            text: "New Event Added Successfully",
+            icon: "success",
+            confirmButtonText: "Done",
+          });
+        }
+
+        reset();
+        navigate("/admin/manage-recentEvents", { state: { from: location } });
+
+        return data;
+      } catch (error) {
+        console.error("Error adding recent event:", error);
+
+        throw error;
+      }
     },
   });
 
   // console.log(isError, isSuccess);
 
-  const onSubmit = async (data: FormEvent) => {
+  const onSubmit: SubmitHandler<FormData> = async (formData) => {
+    const { _id, imgUrl, eventName, arrangedBy } = formData;
     const newAddedData = {
-      ...data,
+      _id,
+      imgUrl,
+      eventName, // Should be of type string
+      arrangedBy,
       status: "onAir",
     };
     await mutateAsync(newAddedData);

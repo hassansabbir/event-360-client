@@ -1,13 +1,14 @@
 import { TEventItems } from "@/components/EventItem.api";
 import { Button } from "@/components/ui/button";
-import { FormEvent } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+type FormData = TEventItems;
+
 const UpdateEventItems = () => {
-  const itemDetails = useLoaderData() as TEventItems | undefined;
-  // console.log(itemDetails?.data);
+  const itemDetails = useLoaderData() as TEventItems;
+  // console.log(itemDetails);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,14 +19,14 @@ const UpdateEventItems = () => {
     reset,
   } = useForm<TEventItems>();
 
-  const onSubmit = async (data: FormEvent) => {
+  const onSubmit: SubmitHandler<FormData> = async (formData) => {
     const updatedData = {
-      ...data,
+      ...formData,
       status: "onAir",
     };
     // console.log(data);
     await fetch(
-      `https://nlwd-b2-assignment-5-server.vercel.app/new-eventItems/${itemDetails?.data?._id}`,
+      `${import.meta.env.VITE_SERVER_API}/new-eventItems/${itemDetails?._id}`,
       {
         method: "PATCH",
         headers: {
@@ -39,7 +40,7 @@ const UpdateEventItems = () => {
         console.log(data);
         if (data.success) {
           Swal.fire({
-            title: `${itemDetails?.data?.itemName} has been modified.`,
+            title: `${itemDetails?.itemName} has been modified.`,
             showClass: {
               popup: "animate__animated animate__fadeInDown",
             },
@@ -78,7 +79,7 @@ const UpdateEventItems = () => {
             <input
               {...register("eventItem", { required: true })}
               type="text"
-              defaultValue={itemDetails?.data?.eventItem}
+              defaultValue={itemDetails?.eventItem}
               name="eventItem"
               className="rounded w-full my-2 bg-slate-500 p-3 active:border-none"
             />
@@ -93,7 +94,7 @@ const UpdateEventItems = () => {
             <input
               {...register("itemName", { required: true })}
               type="text"
-              defaultValue={itemDetails?.data?.itemName}
+              defaultValue={itemDetails?.itemName}
               name="itemName"
               className="rounded w-full my-2 bg-slate-500 p-3 active:border-none"
             />
@@ -108,7 +109,7 @@ const UpdateEventItems = () => {
             <input
               {...register("imageUrl", { required: true })}
               type="text"
-              defaultValue={itemDetails?.data?.imageUrl}
+              defaultValue={itemDetails?.imageUrl}
               name="imageUrl"
               className="rounded w-full my-2 bg-slate-500 p-3 active:border-none"
             />
@@ -122,7 +123,7 @@ const UpdateEventItems = () => {
               className="w-full text-black h-12 rounded-none text-lg font-bold bg-gradient-to-r from-gradientFrom to-gradientTo"
               type="submit"
             >
-              Edit Event
+              Edit Item
             </Button>
           </div>
         </form>

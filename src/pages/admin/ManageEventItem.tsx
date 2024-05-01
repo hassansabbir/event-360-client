@@ -1,10 +1,12 @@
 import { TEventItems, getEventItems } from "@/components/EventItem.api";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { FieldValues, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+
+type FormData = TEventItems;
 
 const ManageEventItem = () => {
   const { data, isLoading, isError, refetch } = useQuery({
@@ -19,42 +21,51 @@ const ManageEventItem = () => {
     reset,
   } = useForm<TEventItems>();
 
-  const { mutateAsync, isSuccess } = useMutation({
+  const { mutateAsync } = useMutation<FormData, unknown, FormData>({
     mutationFn: async (data) => {
-      return await fetch(
-        "https://nlwd-b2-assignment-5-server.vercel.app/eventItems",
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-          if (data.insertedId) {
-            Swal.fire({
-              title: "Success",
-              text: "New Event Added Successfully",
-              icon: "success",
-              confirmButtonText: "Done",
-            });
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_SERVER_API}/eventItems`,
+          {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-          reset();
-          refetch();
-        });
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to add event item");
+        }
+
+        const responseData = await response.json();
+
+        if (responseData.insertedId) {
+          Swal.fire({
+            title: "Success",
+            text: "New Event Item Added Successfully",
+            icon: "success",
+            confirmButtonText: "Done",
+          });
+        }
+
+        reset();
+        refetch();
+
+        // Return the original data if the API call doesn't return any data
+        return data;
+      } catch (error) {
+        console.error("Error adding event item:", error);
+        // Rethrow the error to be caught by the caller
+        throw error;
+      }
     },
   });
 
-  if (isSuccess) {
-    console.log("Event Item Added Successfully!");
-  }
-
-  const onSubmit = async (data: FieldValues) => {
+  const onSubmit: SubmitHandler<FormData> = async (formData) => {
     const newAddedData = {
-      ...data,
+      ...formData,
       status: "onAir",
     };
     await mutateAsync(newAddedData);
@@ -63,7 +74,7 @@ const ManageEventItem = () => {
   const eventItems = data?.data?.data;
 
   if (isLoading) {
-    return <p className="text-white">loadingggg.....</p>;
+    return <span>loadinggg</span>;
   }
   if (isError) {
     return <p className="text-white">Something wwwent wrong</p>;
@@ -71,28 +82,37 @@ const ManageEventItem = () => {
   // console.log(isLoading, data);
 
   const handleDelete = (item: TEventItems) => {
-    fetch(
-      `https://nlwd-b2-assignment-5-server.vercel.app/eventItems/${item?._id}`,
-      {
-        method: "PATCH",
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.modifiedCount > 0) {
-          refetch();
-          Swal.fire({
-            title: `${item?.itemName} is Deleted.`,
-            showClass: {
-              popup: "animate__animated animate__fadeInDown",
-            },
-            hideClass: {
-              popup: "animate__animated animate__fadeOutUp",
-            },
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${import.meta.env.VITE_SERVER_API}/eventItems/${item?._id}`, {
+          method: "PATCH",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            if (data.modifiedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: `${item?.itemName} is Deleted.`,
+                showClass: {
+                  popup: "animate__animated animate__fadeInDown",
+                },
+                hideClass: {
+                  popup: "animate__animated animate__fadeOutUp",
+                },
+              });
+            }
           });
-        }
-      });
+      }
+    });
   };
 
   return (
@@ -161,7 +181,7 @@ const ManageEventItem = () => {
               className="w-full text-black h-12 rounded-none text-lg font-bold bg-gradient-to-r from-gradientFrom to-gradientTo"
               type="submit"
             >
-              Edit Event
+              Add Item
             </Button>
           </div>
         </form>

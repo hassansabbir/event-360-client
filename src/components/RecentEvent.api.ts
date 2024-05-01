@@ -1,9 +1,7 @@
 import axios from "axios";
 
 export const getRecentEvents = async () => {
-  return await axios.get(
-    "https://nlwd-b2-assignment-5-server.vercel.app/recent-event"
-  );
+  return await axios.get(`${import.meta.env.VITE_SERVER_API}/recent-event`);
 };
 
 export type TRecentEvent = {

@@ -1,13 +1,14 @@
 import { TRecentEvent } from "@/components/RecentEvent.api";
 import { Button } from "@/components/ui/button";
-import { FormEvent } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+type FormData = TRecentEvent;
+
 const UpdateRecentEvent = () => {
-  const eventDetails = useLoaderData() as TRecentEvent | undefined;
-  // console.log(eventDetails?.data);
+  const eventDetails = useLoaderData() as TRecentEvent;
+  // console.log(eventDetails);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,13 +19,15 @@ const UpdateRecentEvent = () => {
     reset,
   } = useForm<TRecentEvent>();
 
-  const onSubmit = async (data: FormEvent) => {
+  const onSubmit: SubmitHandler<FormData> = async (formData) => {
     const updatedData = {
-      ...data,
+      ...formData,
       status: "onAir",
     };
     await fetch(
-      `https://nlwd-b2-assignment-5-server.vercel.app/full-recent-event/${eventDetails?.data?._id}`,
+      `${import.meta.env.VITE_SERVER_API}/full-recent-event/${
+        eventDetails?._id
+      }`,
       {
         method: "PATCH",
         headers: {
@@ -38,7 +41,7 @@ const UpdateRecentEvent = () => {
         console.log(data);
         if (data.success) {
           Swal.fire({
-            title: `${eventDetails?.data?.eventName} has been modified.`,
+            title: `${eventDetails?.eventName} has been modified.`,
             showClass: {
               popup: "animate__animated animate__fadeInDown",
             },
@@ -74,7 +77,7 @@ const UpdateRecentEvent = () => {
             <input
               {...register("eventName", { required: true })}
               type="text"
-              defaultValue={eventDetails?.data?.eventName}
+              defaultValue={eventDetails?.eventName}
               name="eventName"
               className="rounded w-full my-2 bg-slate-500 p-3 active:border-none"
             />
@@ -89,7 +92,7 @@ const UpdateRecentEvent = () => {
             <input
               {...register("imgUrl", { required: true })}
               type="text"
-              defaultValue={eventDetails?.data?.imgUrl}
+              defaultValue={eventDetails?.imgUrl}
               name="imgUrl"
               className="rounded w-full my-2 bg-slate-500 p-3 active:border-none"
             />
@@ -104,7 +107,7 @@ const UpdateRecentEvent = () => {
             <input
               {...register("arrangedBy", { required: true })}
               type="text"
-              defaultValue={eventDetails?.data?.arrangedBy}
+              defaultValue={eventDetails?.arrangedBy}
               name="arrangedBy"
               className="rounded w-full my-2 bg-slate-500 p-3 active:border-none"
             />
